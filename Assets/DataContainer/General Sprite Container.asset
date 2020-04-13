@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e4e6eda220ce742870edd5ba4136ed, type: 3}
+  m_Name: General Sprite Container
+  m_EditorClassIdentifier: 
+  bun: {fileID: 21300000, guid: d2822b15dbda6224798caa1633b44513, type: 3}
+  meat: {fileID: 21300000, guid: a48da755a920f9e41aa452aef7af68ae, type: 3}
+  cheese: {fileID: 21300000, guid: 0cd9d0be25d83274480eb61f7b623213, type: 3}
+  salad: {fileID: 21300000, guid: 1512543d445be4f4f86391847c582e1c, type: 3}
+  cutSalad: {fileID: 21300000, guid: 5b30f16ec1a87994a9820c62b1a1af2b, type: 3}
+  onion: {fileID: 21300000, guid: 180f3386b67775744b5eed7d70f2b67a, type: 3}
+  cutOnion: {fileID: 21300000, guid: f5e03d9bbc734e84bb9b26283a2a597c, type: 3}
+  tomato: {fileID: 21300000, guid: b52d42d95e113e447aeaa68abd882a54, type: 3}
+  cutTomato: {fileID: 21300000, guid: d86a5a3cbea5a404cb2638c74a9dea60, type: 3}
+  knife: {fileID: 21300000, guid: 666c1ac5b4bf18f42bb71d06f2d2e8f2, type: 3}
+  redCross: {fileID: 21300000, guid: 9ffebba9abf6f5541af50c638abaca3e, type: 3}
+  greenCheck: {fileID: 21300000, guid: c447f1e09289852428d1714619f771f7, type: 3}
+  area: {fileID: 21300000, guid: bf5747b05aa495846bc27f87bd814e87, type: 3}
