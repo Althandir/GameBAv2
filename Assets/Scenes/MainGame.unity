@@ -3872,8 +3872,9 @@ GameObject:
   m_Component:
   - component: {fileID: 386280911}
   - component: {fileID: 386280912}
+  - component: {fileID: 386280913}
   m_Layer: 0
-  m_Name: GameSettings
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3903,6 +3904,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b166b9f9aeb50684e8e683199f603b24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &386280913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386280910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ed077d3e1c2c245a2979a8aa736112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &408095186
@@ -4185,7 +4198,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 384.00006, y: 280.8}
+  m_Size: {x: 216, y: 280.8}
   m_EdgeRadius: 0
 --- !u!222 &435697761
 CanvasRenderer:
@@ -6283,7 +6296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameUI: {fileID: 127832914}
   _movementDelay: 0.05
-  _movementSpeed: 0.1
+  _movementSpeed: 0.01
 --- !u!222 &711629017
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8304,7 +8317,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 384, y: 280.80002}
+  m_Size: {x: 216, y: 280.80002}
   m_EdgeRadius: 0
 --- !u!222 &967192548
 CanvasRenderer:
@@ -16913,7 +16926,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 384.00006, y: 280.80002}
+  m_Size: {x: 216, y: 280.80002}
   m_EdgeRadius: 0
 --- !u!114 &1874722566
 MonoBehaviour:

@@ -9,7 +9,8 @@ public class OrderZone : MonoBehaviour
     bool _hasActiveOrders;
     int _nextOrderID = 0;
 
-    bool _createOrders = true;
+    bool _canCreateOrders = true;
+    float _orderCreationMaxTimeDelay = 7.5f;
 
     IEnumerator _orderCreator;
     IEnumerator _orderActiveChecker;
@@ -17,11 +18,6 @@ public class OrderZone : MonoBehaviour
     UnityEventInt _changeNextOrderIDEvent = new UnityEventInt();
 
     public UnityEventInt ChangeNextOrderIDEvent { get => _changeNextOrderIDEvent;}
-
-    public void stopCreateOrders()
-    {
-        _createOrders = false;
-    }
 
     private void Awake()
     {
@@ -42,8 +38,8 @@ public class OrderZone : MonoBehaviour
 
     IEnumerator OrderCreator()
     {
-        yield return new WaitForSeconds(2);
-        while (_createOrders)
+        yield return new WaitForSeconds(1);
+        while (_canCreateOrders)
         {
             if (!_hasActiveOrders)
             {
@@ -54,7 +50,7 @@ public class OrderZone : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(Random.Range(1, 3));
+                yield return new WaitForSeconds(Random.Range(3, _orderCreationMaxTimeDelay));
                 CreateNewOrder();
             }
         }

@@ -19,17 +19,14 @@ public class RatSystem : MonoBehaviour
     RectTransform _pos;
     BoxCollider2D _boxCol2D;
 
-    IEnumerator _visiblityChecker;
-    IEnumerator _movingRoutine;
-    IEnumerator _AudioRoutine;
+    Coroutine _visiblityChecker;
+    Coroutine _movingRoutine;
+    Coroutine _AudioRoutine;
 
     private void Awake()
     {
         _pos = GetComponent<RectTransform>();
         _boxCol2D = GetComponent<BoxCollider2D>();
-        _movingRoutine = Move();
-        _visiblityChecker = CheckVisibility();
-        _AudioRoutine = PlayAudio();
     }
 
     /// <summary>
@@ -43,14 +40,15 @@ public class RatSystem : MonoBehaviour
             _isActive = true;
             _movementSpeed = 0.01f;
             SetStartPos();
-            StartCoroutine(_visiblityChecker);
-            StartCoroutine(_movingRoutine);
-            StartCoroutine(_AudioRoutine);
+            _visiblityChecker = StartCoroutine(CheckVisibility());
+            _movingRoutine = StartCoroutine(Move());
+            _AudioRoutine = StartCoroutine(PlayAudio());
         }
     }
 
     /// <summary>
-    /// Checks if the rat is visible every 0.1 seconds
+    /// Checks if the rat is visible every 0.1 seconds. 
+    /// If not visible it stops all Coroutines on this object
     /// </summary>
     /// <returns></returns>
     IEnumerator CheckVisibility()
@@ -71,14 +69,24 @@ public class RatSystem : MonoBehaviour
             {
                 _isVisible = false;
                 _isActive = false;
-                break;
+                StopRunningRoutines();
             }
             else
             {
                 _isVisible = true;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.25f);
         }
+    }
+
+    /// <summary>
+    /// Stops <see cref="_movingRoutine"/>, <see cref="_AudioRoutine"/> an d<see cref="_visiblityChecker"/>
+    /// </summary>
+    private void StopRunningRoutines()
+    {
+        StopCoroutine(_movingRoutine);
+        StopCoroutine(_AudioRoutine);
+        StopCoroutine(_visiblityChecker);
     }
 
     /// <summary>
@@ -93,6 +101,8 @@ public class RatSystem : MonoBehaviour
         {
             MovementVector = new Vector3(MovementVector.x * (-1), MovementVector.y);
         }
+
+        yield return new WaitForSeconds(0.1f);
 
         while (_isVisible) 
         {
@@ -119,6 +129,7 @@ public class RatSystem : MonoBehaviour
     void SetStartPos()
     {
         _pos.anchoredPosition = new Vector2(RandomX(), RandomY());
+        _isVisible = true;
     }
 
     /// <summary>
