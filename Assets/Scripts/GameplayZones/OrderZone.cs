@@ -9,12 +9,19 @@ public class OrderZone : MonoBehaviour
     bool _hasActiveOrders;
     int _nextOrderID = 0;
 
+    bool _createOrders = true;
+
     IEnumerator _orderCreator;
     IEnumerator _orderActiveChecker;
 
     UnityEventInt _changeNextOrderIDEvent = new UnityEventInt();
 
     public UnityEventInt ChangeNextOrderIDEvent { get => _changeNextOrderIDEvent;}
+
+    public void stopCreateOrders()
+    {
+        _createOrders = false;
+    }
 
     private void Awake()
     {
@@ -36,7 +43,7 @@ public class OrderZone : MonoBehaviour
     IEnumerator OrderCreator()
     {
         yield return new WaitForSeconds(2);
-        while (true)
+        while (_createOrders)
         {
             if (!_hasActiveOrders)
             {
@@ -134,42 +141,30 @@ public class OrderZone : MonoBehaviour
             rating += 1;
         }
 
-        Debug.LogWarning(rating);
-
         if (_orders[_nextOrderID].WantCheese == BurgerZone.Instance.HasCheese)
         {
             rating += 1;
         }
-
-        Debug.LogWarning((int)rating);
 
         if (_orders[_nextOrderID].WantSalad == BurgerZone.Instance.HasSalad)
         {
             rating += 1;
         }
 
-        Debug.LogWarning(rating);
-
         if (_orders[_nextOrderID].WantOnion == BurgerZone.Instance.HasOnion)
         {
             rating += 1;
         }
-
-        Debug.LogWarning(rating);
 
         if (_orders[_nextOrderID].WantTomato == BurgerZone.Instance.HasTomato)
         {
             rating += 1;
         }
 
-        Debug.LogWarning(rating);
-
         if (!BurgerZone.Instance.HasBuns)
         {
             rating -= 3;
         }
-
-        Debug.LogWarning(rating);
 
         if (rating < 0)
         {
