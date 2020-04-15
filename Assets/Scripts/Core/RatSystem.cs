@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(RectTransform), typeof(BoxCollider2D))]
 public class RatSystem : MonoBehaviour
 {
+    static RatSystem _instance;
+
     [SerializeField] RectTransform _gameUI;
     [SerializeField]
     [Range(0.05f, .15f)] 
@@ -23,10 +25,22 @@ public class RatSystem : MonoBehaviour
     Coroutine _movingRoutine;
     Coroutine _AudioRoutine;
 
+    public bool IsActive { get => _isActive; }
+    public static RatSystem Instance { get => _instance; }
+
     private void Awake()
     {
         _pos = GetComponent<RectTransform>();
         _boxCol2D = GetComponent<BoxCollider2D>();
+
+        if (!_instance)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Debug.LogError("Multiple Ratsystems found.");
+        }
     }
 
     /// <summary>

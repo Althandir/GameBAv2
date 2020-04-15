@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,14 +11,16 @@ public class OrderZone : MonoBehaviour
     int _nextOrderID = 0;
 
     bool _canCreateOrders = true;
-    float _orderCreationMaxTimeDelay = 7.5f;
 
     IEnumerator _orderCreator;
     IEnumerator _orderActiveChecker;
 
     UnityEventInt _changeNextOrderIDEvent = new UnityEventInt();
+    UnityEvent _newOrderCreated = new UnityEvent();
 
     public UnityEventInt ChangeNextOrderIDEvent { get => _changeNextOrderIDEvent;}
+    public UnityEvent NewOrderCreatedEvent { get => _newOrderCreated; }
+    public bool HasActiveOrders { get => _hasActiveOrders; }
 
     private void Awake()
     {
@@ -30,10 +33,17 @@ public class OrderZone : MonoBehaviour
     private void Start()
     {
         AssignOrders();
+
         BellZone.Instance.BellPressedEvent.AddListener(OnBellPressed);
+        GameManager.Instance.MaxOrdersReachedEvent.AddListener(OnMaxOrdersReached);
 
         StartCoroutine(_orderCreator);
         StartCoroutine(_orderActiveChecker);
+    }
+
+    private void OnMaxOrdersReached()
+    {
+        _canCreateOrders = false;
     }
 
     IEnumerator OrderCreator()
@@ -50,7 +60,7 @@ public class OrderZone : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(Random.Range(3, _orderCreationMaxTimeDelay));
+                yield return new WaitForSeconds(UnityEngine.Random.Range(3, 9));
                 CreateNewOrder();
             }
         }
@@ -123,6 +133,7 @@ public class OrderZone : MonoBehaviour
             if (!order.IsActive)
             {
                 order.Activate();
+                NewOrderCreatedEvent.Invoke();
                 break;
             }
         }

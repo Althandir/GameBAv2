@@ -24,6 +24,14 @@ public class HighlightManager : MonoBehaviour
         Pulsate();
     }
 
+    public void OnDisable()
+    {
+        foreach (var image in _highlighterImages)
+        {
+            image.enabled = false;
+        }
+    }
+
     void Pulsate()
     {
         foreach (var image in _highlighterImages)

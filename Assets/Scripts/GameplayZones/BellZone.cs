@@ -35,6 +35,10 @@ public class BellZone : MonoBehaviour
         {
             Debug.LogError("MouseSystem is Disabled.");
         }
+        else if (RatSystem.Instance.IsActive)
+        {
+            Debug.LogError("Rat is active.");
+        }
         else
         {
             Debug.Log("Bell pressed.");
