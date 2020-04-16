@@ -7,3 +7,5 @@ public enum Rating
 {
     zeroStar, oneStar, twoStar, threeStar, fourStar, fiveStar
 }
+
+

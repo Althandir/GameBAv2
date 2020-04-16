@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 
 public class DisplayLatestRatings : DisplayRating
 {
-    [SerializeField] Transform _starsContainer;
-    [SerializeField] TMP_Text _textComponent;
-    [SerializeField] bool _getLatestRating;
+    [SerializeField] Transform _starsContainer = null;
+    [SerializeField] TMP_Text _textComponent = null;
+    [SerializeField] bool _getLatestRating = false;
 
     override protected void Awake()
     {
@@ -42,29 +39,6 @@ public class DisplayLatestRatings : DisplayRating
 
     private void ChangeText(int RatingAsInt)
     {
-        switch (RatingAsInt)
-        {
-            case 0:
-                _textComponent.text = "0 Sterne.";
-                break;
-            case 1:
-                _textComponent.text = "1 Stern.";
-                break;
-            case 2:
-                _textComponent.text = "2 Sterne.";
-                break;
-            case 3:
-                _textComponent.text = "3 Sterne.";
-                break;
-            case 4:
-                _textComponent.text = "4 Sterne.";
-                break;
-            case 5:
-                _textComponent.text = "5 Sterne.";
-                break;
-            default:
-                _textComponent.text = string.Empty;
-                break;
-        }
+        _textComponent.text = LanguageManager.Instance.GetRatingText(RatingAsInt);
     }
 }

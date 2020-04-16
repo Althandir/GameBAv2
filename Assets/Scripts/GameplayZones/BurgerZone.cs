@@ -8,7 +8,7 @@ public class BurgerZone : MonoBehaviour
 {
     static BurgerZone _instance;
 
-    [SerializeField] Color _transparentColor;
+    [SerializeField] Color _transparentColor = Color.white;
 
     bool _hasBuns;
     bool _hasMeat;

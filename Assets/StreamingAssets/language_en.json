@@ -1,0 +1,32 @@
+{
+	"MainMenuTitle": "BURGER-MAN",
+	"MainMenuSubtitle": "Create your awesome own burgershop!",
+	"PlayButtonText": "Start Game",
+	"TutorialButtonText": "Tutorial",
+	"SettingsButtonText": "Settings",
+	"ExitButtonText": "Exit",
+	"SettingsOrderText": "total amount of orders:",
+	"SettingsRatDelayText": "time delay of rat in seconds",
+	"zeroStarText": [
+		"This isn't even a burger.",
+		"Bad. Just bad."
+	],
+	"oneStarText": [
+		"Looks like a burger, but doesn't taste like one."
+	],
+	"twoStarText": [
+		"Meh..."
+	],
+	"threeStarText": [
+		"It's okay, but could be better.",
+		"Okay. But nothing more."
+	],
+	"fourStarText": [
+		"Quite good."
+	],
+	"fiveStarText": [
+		"Awesome",
+		"Great."
+	],
+	"EndOfGameText": "Game is over."
+}

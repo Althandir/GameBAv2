@@ -1,0 +1,20 @@
+{
+	"MainMenuTitle": "",
+	"MainMenuSubtitle": "",
+	"PlayButtonText": "",
+	"TutorialButtonText": "",
+	"SettingsButtonText": "",
+	"ExitButtonText": "",
+	"SettingsOrderText": "",
+	"SettingsRatDelayText": "",
+	"zeroStarText": [
+		"example1",
+		"example2"
+	],
+	"oneStarText": [],
+	"twoStarText": [],
+	"threeStarText": [],
+	"fourStarText": [],
+	"fiveStarText": [],
+	"EndOfGameText": ""
+}

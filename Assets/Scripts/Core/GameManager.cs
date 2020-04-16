@@ -8,14 +8,17 @@ public class GameManager : MonoBehaviour
 {
     static GameManager _instance;
 
-    [SerializeField] OrderZone _orderZone;
-    [SerializeField] RatSystem _ratSystem;
-    [SerializeField] HighlightManager _highlightManager;
-
+    [SerializeField] GameObject _endofGameUI = null;
+    [SerializeField] OrderZone _orderZone = null;
+    [SerializeField] RatSystem _ratSystem = null;
+    [SerializeField] HighlightManager _highlightManager = null;
     [SerializeField] int _maxNumOrders = 3;
-    int _actNumOrders = 0;
+    [SerializeField] float _ratSpawnDelay = 30; 
 
-    bool _endGame;
+    int _actNumOrders = 0;
+    bool _endOfGameReached;
+
+    float ratTimer = 0.0f;
 
     UnityEvent _maxOrdersReached = new UnityEvent();
 
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Multiple GameManagers found!");
         }
+
+        LoadSettings();
     }
 
     private void Start()
@@ -41,9 +46,30 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (CheckEndGameConditions())
+        CheckRatSystem();
+        
+        if (CheckEndGameConditions() && !_endOfGameReached)
         {
             EndGame();
+        }
+    }
+
+    private void LoadSettings()
+    {
+        if (GameSettings.Instance)
+        {
+            _maxNumOrders = GameSettings.Instance.NumMaxOrders;
+            _ratSpawnDelay = GameSettings.Instance.RatDelay;
+        }
+    }
+
+    private void CheckRatSystem()
+    {
+        ratTimer += Time.deltaTime;
+        if (ratTimer > _ratSpawnDelay)
+        {
+            ratTimer = 0.0f;
+            _ratSystem.SpawnRat();
         }
     }
 
@@ -70,11 +96,10 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        if (!_endGame)
-        {
-            _endGame = true;
-            _highlightManager.enabled = false;
-            Debug.Log("End of Game!");
-        }
+        _endOfGameReached = true;
+        _highlightManager.enabled = false;
+        _endofGameUI.SetActive(true);
+
+        Debug.Log("End of Game!");
     }
 }

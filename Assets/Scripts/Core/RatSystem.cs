@@ -8,7 +8,7 @@ public class RatSystem : MonoBehaviour
 {
     static RatSystem _instance;
 
-    [SerializeField] RectTransform _gameUI;
+    [SerializeField] RectTransform _gameUI = null;
     [SerializeField]
     [Range(0.05f, .15f)] 
     float _movementDelay;

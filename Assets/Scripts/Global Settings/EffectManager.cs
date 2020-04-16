@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-    [SerializeField] Material _glowStars;
+    [SerializeField] Material _glowStars = null;
 
     private void Update()
     {
