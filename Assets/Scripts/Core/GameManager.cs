@@ -47,10 +47,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        CheckRatSystem();
         if (!_endOfGameReached)
         {
             _gametime += Time.deltaTime;
+            CheckRatSystem();
         }
 
         if (CheckEndGameConditions() && !_endOfGameReached)
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("EndGame")]
     private void EndGame()
     {
         _endOfGameReached = true;
