@@ -16,6 +16,7 @@ public class LanguageManager : MonoBehaviour
 
     public static LanguageManager Instance { get => _instance;}
     public UnityEvent OnLanguageChangedEvent { get => OnLanguageChanged;}
+    public Lang UsedLanguage { get => _usedLanguage; }
 
     private void Awake()
     {
