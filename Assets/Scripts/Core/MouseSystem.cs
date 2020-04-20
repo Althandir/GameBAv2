@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer),typeof(MouseSystemAudioManager))]
 public sealed class MouseSystem : MonoBehaviour
 {
     static MouseSystem _instance;
@@ -11,6 +11,7 @@ public sealed class MouseSystem : MonoBehaviour
 
     [SerializeField] SpriteContainer _spriteContainer = null;
     SpriteRenderer _spriteRenderer = null;
+    MouseSystemAudioManager _audioManager = null;
 
     [SerializeField] bool _isHolding;
     [SerializeField] bool _isHoldingKnife;
@@ -26,17 +27,21 @@ public sealed class MouseSystem : MonoBehaviour
         _isHolding = true;
         _holdingFood = value;
         UpdateSprite();
+        _audioManager.PlayOnPickupFoodSound();
     }
 
     private void DropHolding()
     {
         _isHolding = false;
         UpdateSprite();
+        _audioManager.PlayDropSound();
     }
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioManager = GetComponent<MouseSystemAudioManager>();
+
         if (!_instance)
         {
             _instance = this;
@@ -197,15 +202,18 @@ public sealed class MouseSystem : MonoBehaviour
             cuttingKnife.ChangeStatus();
             _isHoldingKnife = true;
             UpdateSprite();
+            _audioManager.PlayOnPickupKnifeSound();
         }
         else if (_isHoldingKnife) // give Knife back
         {
             cuttingKnife.ChangeStatus();
             _isHoldingKnife = false;
             UpdateSprite();
+            _audioManager.PlayDropKnifeSound();
         }
         else 
         {
+            _audioManager.PlayOnErrorSound();
             Debug.Log("Can't pick up Knife.");
         }
     }
@@ -214,6 +222,7 @@ public sealed class MouseSystem : MonoBehaviour
     {
         if (_isHoldingKnife)
         {
+            _audioManager.PlayOnErrorSound();
             Debug.Log("Cannot trash knife.");
         }
         else
@@ -237,6 +246,7 @@ public sealed class MouseSystem : MonoBehaviour
             }
             else
             {
+                _audioManager.PlayOnErrorSound();
                 Debug.LogError("Could not place food on grill.");
             }
         }
@@ -244,7 +254,6 @@ public sealed class MouseSystem : MonoBehaviour
         {
             if (grill.HasMeat)
             {
-
                 PickupFood(grill.RemoveMeat());
             }
         }
@@ -285,11 +294,17 @@ public sealed class MouseSystem : MonoBehaviour
                     DropHolding();
                 }
             }
+            else
+            {
+                _audioManager.PlayOnErrorSound();
+            }
         }
         else if (_isHoldingKnife)
         {
             zone.CutFoodChecker();
+            _audioManager.PlayOnChopFoodSound();
         }
+
     }
 
     void ClickedOnCutZone(CutZone zone)

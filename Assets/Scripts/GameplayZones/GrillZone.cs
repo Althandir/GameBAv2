@@ -1,25 +1,27 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GrillZone : MonoBehaviour
 {
-    Image _image = null;
+    Image _meatSprite = null;
+    Image _progressImage = null;
     Color _rawMeatColor;
     Color _goodMeatColor;
     Color _burnedMeatColor;
 
     bool _hasMeat;
+    
     [SerializeField] float _grillTimer = 0.0f;
     [SerializeField] float _grillTimeGood = 5.0f;
     [SerializeField] float _grillTimeBurned = 10.0f;
-    [Range(0.01f, 0.05f)]
-    [SerializeField] float _colorGradingPower = 0.01f;
+    [Range(0.0025f, 0.05f)]
+    [SerializeField] float _colorGradingPower = 0.025f;
 
     private void Awake()
     {
-        _image = transform.GetChild(0).GetComponent<Image>();
+        _meatSprite = transform.GetChild(0).GetComponent<Image>();
+        _progressImage = transform.GetChild(1).GetComponent<Image>();
         _rawMeatColor = new Color(1, 0.4f, 1, 1);
         _goodMeatColor = Color.white;
         _burnedMeatColor = Color.gray;
@@ -29,15 +31,19 @@ public class GrillZone : MonoBehaviour
 
     IEnumerator GrillRoutine()
     {
-        float timeCounter = 0.1f;
-        _image.enabled = true;
+        float timeCounter = 0.025f;
+        _meatSprite.enabled = true;
+        _progressImage.enabled = true;
         while (_hasMeat)
         {
             yield return new WaitForSeconds(timeCounter);
             _grillTimer += timeCounter;
             ColorgradeMeat();
+            UpdateProgessCircle();
         }
-        _image.enabled = false;
+        _meatSprite.enabled = false;
+        _progressImage.enabled = false;
+        _progressImage.fillAmount = 0.0f;
         yield return null;
     }
 
@@ -45,14 +51,31 @@ public class GrillZone : MonoBehaviour
     {
         if (_grillTimer < _grillTimeGood)
         {
-            if (_image.color.g < 1)
+            if (_meatSprite.color.g < 1)
             {
-                _image.color += new Color(0, _colorGradingPower, 0, 0);
+                _meatSprite.color += new Color(0, _colorGradingPower, 0, 0);
             }
         }
-        else if (_grillTimer < _grillTimeBurned && _grillTimer > _grillTimeGood)
+        else if (_grillTimer < _grillTimeBurned && _grillTimer > _grillTimeGood )
         {
-            _image.color -= new Color(_colorGradingPower, _colorGradingPower, _colorGradingPower, 0);
+            if (_meatSprite.color.r > 0.33f)
+            {
+                _meatSprite.color -= new Color(_colorGradingPower, _colorGradingPower, _colorGradingPower, 0);
+            }
+        }
+    }
+
+    void UpdateProgessCircle()
+    {
+        if (_grillTimer < _grillTimeGood)
+        {
+            _progressImage.color = Color.green;
+            _progressImage.fillAmount = _grillTimer / _grillTimeGood;
+        }
+        else if (_grillTimer > _grillTimeGood && _grillTimer <= _grillTimeBurned )
+        {
+            _progressImage.color = Color.red;
+            _progressImage.fillAmount = (_grillTimer - _grillTimeGood) / _grillTimeGood;
         }
     }
 
@@ -77,17 +100,17 @@ public class GrillZone : MonoBehaviour
         if (meat == Food.rawMeat)
         {
             _grillTimer = 0.0f;
-            _image.color = _rawMeatColor;
+            _meatSprite.color = _rawMeatColor;
         }
         else if (meat == Food.cookedMeat)
         {
             _grillTimer = _grillTimeGood;
-            _image.color = _goodMeatColor;
+            _meatSprite.color = _goodMeatColor;
         }
         else if (meat == Food.burnedMeat)
         {
             _grillTimer = _grillTimeBurned;
-            _image.color = _burnedMeatColor;
+            _meatSprite.color = _burnedMeatColor;
         }
     }
 

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D), typeof(AudioSource))]
 public class BellZone : MonoBehaviour
 {
     static BellZone _instance;
 
+    AudioSource _audioSource = null;
     UnityEvent _bellPressed = new UnityEvent();
 
     public UnityEvent BellPressedEvent { get => _bellPressed; }
@@ -18,6 +19,7 @@ public class BellZone : MonoBehaviour
         if (!_instance)
         {
             _instance = this;
+            _audioSource = GetComponent<AudioSource>();
         }
         else
         {
@@ -43,6 +45,7 @@ public class BellZone : MonoBehaviour
         {
             Debug.Log("Bell pressed.");
             _bellPressed.Invoke();
+            _audioSource.Play();
         }
     }
 

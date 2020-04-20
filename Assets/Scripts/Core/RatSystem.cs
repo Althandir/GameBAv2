@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(RectTransform), typeof(BoxCollider2D))]
+[RequireComponent(typeof(RectTransform), typeof(BoxCollider2D), typeof (AudioSource))]
 public class RatSystem : MonoBehaviour
 {
     static RatSystem _instance;
@@ -20,6 +20,7 @@ public class RatSystem : MonoBehaviour
     bool _isVisible;
     RectTransform _pos;
     BoxCollider2D _boxCol2D;
+    AudioSource _audioSource;
 
     Coroutine _visiblityChecker;
     Coroutine _movingRoutine;
@@ -32,6 +33,7 @@ public class RatSystem : MonoBehaviour
     {
         _pos = GetComponent<RectTransform>();
         _boxCol2D = GetComponent<BoxCollider2D>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (!_instance)
         {
@@ -126,14 +128,22 @@ public class RatSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Plays an audio every 5 seconds
+    /// Plays an audio every 10 seconds
     /// </summary>
     /// <returns></returns>
     IEnumerator PlayAudio()
     {
         while (_isVisible)
         {
-            yield return new WaitForSeconds(5);
+            if (_audioSource.clip)
+            {
+                _audioSource.Play();
+            }
+            else
+            {
+                Debug.LogError("No Audioclip found in Rat!");
+            }
+            yield return new WaitForSeconds(10f);
         }
     }
 

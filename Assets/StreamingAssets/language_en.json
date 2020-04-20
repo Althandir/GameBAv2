@@ -5,8 +5,8 @@
 	"TutorialButtonText": "Tutorial",
 	"SettingsButtonText": "Settings",
 	"ExitButtonText": "Exit",
-	"SettingsOrderText": "total amount of orders:",
-	"SettingsRatDelayText": "time delay of rat in seconds",
+	"SettingsOrderText": "Total amount of orders:",
+	"SettingsRatDelayText": "Time delay of rat in seconds",
 	"zeroStarText": [
 		"This isn't even a burger.",
 		"Bad. Just bad."

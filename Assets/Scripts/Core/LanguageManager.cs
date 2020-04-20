@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Language;
-using System;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class LanguageManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Multiple LanguageManager found.");
+            Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this);
     }

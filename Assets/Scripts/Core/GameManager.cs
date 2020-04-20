@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     int _actNumOrders = 0;
     bool _endOfGameReached;
 
-    float ratTimer = 0.0f;
+    float _gametime = 0.0f;
+    float _ratTimer = 0.0f;
 
     UnityEvent _maxOrdersReached = new UnityEvent();
 
@@ -47,7 +48,11 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CheckRatSystem();
-        
+        if (!_endOfGameReached)
+        {
+            _gametime += Time.deltaTime;
+        }
+
         if (CheckEndGameConditions() && !_endOfGameReached)
         {
             EndGame();
@@ -65,10 +70,10 @@ public class GameManager : MonoBehaviour
 
     private void CheckRatSystem()
     {
-        ratTimer += Time.deltaTime;
-        if (ratTimer > _ratSpawnDelay)
+        _ratTimer += Time.deltaTime;
+        if (_ratTimer > _ratSpawnDelay)
         {
-            ratTimer = 0.0f;
+            _ratTimer = 0.0f;
             _ratSystem.SpawnRat();
         }
     }
@@ -99,7 +104,7 @@ public class GameManager : MonoBehaviour
         _endOfGameReached = true;
         _highlightManager.enabled = false;
         _endofGameUI.SetActive(true);
-
+        SaveData.Save.All(_gametime, Player.Instance.TotalRating);
         Debug.Log("End of Game!");
     }
 }

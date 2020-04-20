@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
@@ -15,8 +13,18 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        LanguageManager.Instance.OnLanguageChangedEvent.Invoke();
+    }
+
     public void EndApplication()
     {
         Application.Quit();
+    }
+
+    private void OnApplicationQuit()
+    {
+        Application.OpenURL(Application.persistentDataPath);
     }
 }
