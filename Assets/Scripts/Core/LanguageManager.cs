@@ -35,7 +35,7 @@ public class LanguageManager : MonoBehaviour
         ChangeLanguage(Lang.en);
     }
 
-    void ChangeLanguage(Lang newLanguage)
+    public void ChangeLanguage(Lang newLanguage)
     {
         string countryTag;
 

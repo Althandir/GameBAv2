@@ -45,6 +45,10 @@ public class BellZone : MonoBehaviour
         {
             Debug.Log("Bell pressed.");
             _bellPressed.Invoke();
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
             _audioSource.Play();
         }
     }

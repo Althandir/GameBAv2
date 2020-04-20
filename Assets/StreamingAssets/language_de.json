@@ -1,0 +1,36 @@
+{
+	"MainMenuTitle": "BURGER-MAN",
+	"MainMenuSubtitle": "Sei der beste Burgerbrater!",
+	"PlayButtonText": "Spiel starten",
+	"TutorialButtonText": "Anleitung",
+	"SettingsButtonText": "Einstellungen",
+	"ExitButtonText": "Spiel beenden",
+	"SettingsOrderText": "Gesamtanzahl an Bestellungen:",
+	"SettingsRatDelayText": "Zeit bis zur nächsten Ratte:",
+	"zeroStarText": [
+		"Das ist nicht mal ein Burger!",
+		"Ist das ein schlechter Witz?"
+	],
+	"oneStarText": [
+		"Puh. Sah aus wie ein Burger, ist aber keiner."
+	],
+	"twoStarText": [
+		"Das geht besser."
+	],
+	"threeStarText": [
+		"Geht so.",
+		"Nicht schlecht.",
+		"Ich kenne schlechtere Burger."
+	],
+	"fourStarText": [
+		"Lecker.",
+		"Fast perfekt.",
+		"Gut."
+	],
+	"fiveStarText": [
+		"Perfekt, bester Burger überhaupt.",
+		"Perfekt",
+		"Einfach Großartig."
+	],
+	"EndOfGameText": "Spiel vorbei!"
+}

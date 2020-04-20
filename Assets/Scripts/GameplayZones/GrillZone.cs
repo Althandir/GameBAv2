@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class GrillZone : MonoBehaviour
 {
+    AudioSource _audioSource = null;
+
+    [SerializeField] AudioClip _rawMeatOnGrillAudio = null;
+    [SerializeField] AudioClip _goodMeatOnGrillAudio = null;
+
     Image _meatSprite = null;
     Image _progressImage = null;
     Color _rawMeatColor;
@@ -20,6 +27,8 @@ public class GrillZone : MonoBehaviour
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
+
         _meatSprite = transform.GetChild(0).GetComponent<Image>();
         _progressImage = transform.GetChild(1).GetComponent<Image>();
         _rawMeatColor = new Color(1, 0.4f, 1, 1);
@@ -40,7 +49,10 @@ public class GrillZone : MonoBehaviour
             _grillTimer += timeCounter;
             ColorgradeMeat();
             UpdateProgessCircle();
+            PlayAudio();
         }
+
+        StopAudio();
         _meatSprite.enabled = false;
         _progressImage.enabled = false;
         _progressImage.fillAmount = 0.0f;
@@ -76,6 +88,29 @@ public class GrillZone : MonoBehaviour
         {
             _progressImage.color = Color.red;
             _progressImage.fillAmount = (_grillTimer - _grillTimeGood) / _grillTimeGood;
+        }
+    }
+
+    private void PlayAudio()
+    {
+        if (!_audioSource.isPlaying)
+        {
+            if (_grillTimer < _grillTimeGood)
+            {
+                _audioSource.PlayOneShot(_rawMeatOnGrillAudio, 0.5f);
+            }
+            else 
+            {
+                _audioSource.PlayOneShot(_goodMeatOnGrillAudio, 0.5f);
+            }
+        }
+    }
+
+    void StopAudio()
+    {
+        if (_audioSource.isPlaying)
+        {
+            _audioSource.Stop();
         }
     }
 
