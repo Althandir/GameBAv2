@@ -69,7 +69,7 @@ public class RatSystem : MonoBehaviour
     /// <returns></returns>
     IEnumerator CheckVisibility()
     {
-        float pufferPixels = _boxCol2D.size.x;
+        float pufferPixels = _boxCol2D.size.x / 2;
         
         float xMin = (_gameUI.rect.width / 2) * (-1) - pufferPixels;
         float xMax = (_gameUI.rect.width / 2) + pufferPixels;
