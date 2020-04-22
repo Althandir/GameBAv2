@@ -36,7 +36,7 @@ public class HighlightManager : MonoBehaviour
     {
         foreach (var image in _highlighterImages)
         {
-            image.color = new Color(Mathf.Abs(Mathf.Cos(Time.realtimeSinceStartup)), Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup)),0,1);
+            image.color = new Color(0, Mathf.Abs(Mathf.Sin(Time.realtimeSinceStartup)), Mathf.Abs(Mathf.Cos(Time.realtimeSinceStartup)), 1);
         }
     }
 

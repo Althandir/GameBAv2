@@ -40,7 +40,7 @@ Material:
     - _BaseIntensity: 1
     - _EnableExternalAlpha: 0
     - _GlowArea: 1.71
-    - _GlowIntensity: 0.95441294
+    - _GlowIntensity: 0.6490785
     - _NoiseIntensity: 0.25
     - _UnlitIntensity: 1
     m_Colors:
