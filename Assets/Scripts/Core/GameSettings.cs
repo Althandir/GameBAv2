@@ -13,6 +13,21 @@ public class GameSettings : MonoBehaviour
     int _numMaxOrders = 20;
 
     public static GameSettings Instance { get => _instance;}
+    public UnityEvent OnValueChanged { get => _onValueChanged; }
+
+    private void Awake()
+    {
+        if (!_instance)
+        {
+            _instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     public float RatDelay 
     { get => _ratDelay;
         set
@@ -32,32 +47,35 @@ public class GameSettings : MonoBehaviour
 
     public void AddNumMaxOrder()
     {
-        NumMaxOrders += 1;
+        if (NumMaxOrders < 40)
+        {
+            NumMaxOrders += 1;
+        }
     }
 
     public void DecNumMaxOrder()
     {
-        NumMaxOrders -= 1;
+        if (NumMaxOrders > 5)
+        {
+            NumMaxOrders -= 1;
+        }
     }
 
     public void AddRatDelay()
     {
-        RatDelay += 1;
+        if (RatDelay < 30)
+        {
+            RatDelay += 1;
+        }
     }
 
     public void DecRatDelay()
     {
-        RatDelay -= 1;
-    }
-
-    public UnityEvent OnValueChanged { get => _onValueChanged; }
-
-    private void Awake()
-    {
-        if (!_instance)
+        if (RatDelay > 10)
         {
-            _instance = this;
-            DontDestroyOnLoad(this);
+            RatDelay -= 1;
         }
     }
+
+
 }

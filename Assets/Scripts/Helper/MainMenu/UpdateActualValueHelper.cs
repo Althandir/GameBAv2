@@ -9,6 +9,7 @@ public class UpdateActualValueHelper : MonoBehaviour
         NumOrder, RatDelay
     }
 
+
     [SerializeField] WatchableValue watchableValue = new WatchableValue();
     TMP_Text text;
 

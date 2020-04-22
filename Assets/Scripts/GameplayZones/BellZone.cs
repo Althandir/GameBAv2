@@ -27,6 +27,11 @@ public class BellZone : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        // Add RedCross if Rat is active
+    }
+
     public void BellPressed()
     {
         if (MouseSystem.Instance.IsHolding || MouseSystem.Instance.IsHoldingKnife)

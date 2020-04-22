@@ -20,8 +20,8 @@ public class GrillZone : MonoBehaviour
     bool _hasMeat;
     
     [SerializeField] float _grillTimer = 0.0f;
-    [SerializeField] float _grillTimeGood = 5.0f;
-    [SerializeField] float _grillTimeBurned = 10.0f;
+    [SerializeField] float _grillTimeGood = 10.0f;
+    [SerializeField] float _grillTimeBurned = 20.0f;
     [Range(0.0025f, 0.05f)]
     [SerializeField] float _colorGradingPower = 0.025f;
 
@@ -97,11 +97,11 @@ public class GrillZone : MonoBehaviour
         {
             if (_grillTimer < _grillTimeGood)
             {
-                _audioSource.PlayOneShot(_rawMeatOnGrillAudio, 0.5f);
+                _audioSource.PlayOneShot(_rawMeatOnGrillAudio, 0.25f);
             }
             else 
             {
-                _audioSource.PlayOneShot(_goodMeatOnGrillAudio, 0.5f);
+                _audioSource.PlayOneShot(_goodMeatOnGrillAudio, 0.25f);
             }
         }
     }

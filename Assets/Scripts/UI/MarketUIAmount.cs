@@ -18,7 +18,7 @@ public class MarketUIAmount : MonoBehaviour
     /// </summary>
     public void IncAmount()
     {
-        if (_amount < 10)
+        if (_amount < 5)
         {
             _amount += 1;
             UpdateText();
